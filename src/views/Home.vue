@@ -1,16 +1,19 @@
 <template>
   <div v-if="isUsernameExist" class="container">
-    <base-header :name="getUsername" />
+    <base-header :name="username" />
+    <todo-input />
   </div>
 </template>
 
 <script>
 import BaseHeader from "@/components/BaseHeader.vue";
+import TodoInput from "@/components/TodoInput.vue";
 
 export default {
   name: "Home",
   components: {
-    BaseHeader
+    BaseHeader,
+    TodoInput
   },
   data() {
     return {
@@ -31,15 +34,8 @@ export default {
       }
     }
   },
-  computed: {
-    getUsername() {
-      return this.username;
-    }
-  },
   mounted() {
     this.insertUsername();
   }
 };
 </script>
-
-<style scoped></style>
