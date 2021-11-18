@@ -1,7 +1,7 @@
 <template>
   <div class="todo-items">
     <ul>
-      <li></li>
+      <li v-for="item in items" :key="item">{{ item }}</li>
     </ul>
   </div>
 </template>
@@ -16,7 +16,9 @@ export default {
   },
   methods: {
     getTodoItem() {
-      console.log(this.item);
+      this.items.push(this.item);
+      // localStorage.setItem("todos", this.items);
+      console.log(this.items);
     }
   },
   updated() {
