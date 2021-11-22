@@ -24,6 +24,13 @@ export default {
   },
   methods: {
     enterTodoItem() {
+      const todos = JSON.parse(localStorage.getItem("todos"));
+      const isTodoExist = todos.map((todo) => (todo == this.$refs.todoInput.value ? todo : []));
+
+      if (isTodoExist.length) {
+        return alert("Activity already added");
+      }
+
       this.$refs.todoInput.value = "";
     }
   }
@@ -38,11 +45,11 @@ export default {
 .form-control,
 .btn {
   font-size: 1.8rem;
+  padding: 1rem 1.4rem;
 }
 
 .btn {
   background-color: #ccc;
-  padding: 0.375rem 1.4rem;
   font-weight: 700;
   transition: all 0.3s ease;
 }

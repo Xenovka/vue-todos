@@ -1,18 +1,11 @@
 <template>
   <div class="header">
-    <h1 class="text-center">{{ username }}'s Todo list</h1>
+    <h1 class="text-center">Wendy's Todo list</h1>
   </div>
 </template>
 
 <script>
-export default {
-  props: ["name"],
-  data() {
-    return {
-      username: this.name
-    };
-  }
-};
+export default {};
 </script>
 
 <style scoped>
