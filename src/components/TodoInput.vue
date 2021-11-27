@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="enterTodoItem" class="todo-form row d-flex justify-content-center">
     <div class="todo-input col-lg-4 offset-lg-1">
-      <input class="form-control" type="text" name="input" id="todo-input" ref="todoInput" v-model.lazy="todoItem" />
+      <input class="form-control" type="text" name="input" id="todo-input" ref="todoInput" />
     </div>
     <div class="input-button col-lg-2">
       <button type="submit" class="btn">Enter</button>
@@ -24,14 +24,21 @@ export default {
   },
   methods: {
     enterTodoItem() {
-      const todos = JSON.parse(localStorage.getItem("todos"));
-      const isTodoExist = todos.map((todo) => (todo == this.$refs.todoInput.value ? todo : []));
+      const todos = JSON.parse(localStorage.getItem("todos")) || null;
+      const itemValue = this.$refs.todoInput.value;
 
-      if (isTodoExist.length) {
-        return alert("Activity already added");
+      if (todos !== null) {
+        for (let todo of todos) {
+          if (todo === itemValue) {
+            this.$refs.todoInput.value = "";
+            return alert("Failed: Activity already exists!");
+          }
+        }
       }
 
+      this.todoItem = itemValue;
       this.$refs.todoInput.value = "";
+      return alert("Success: Activity added!");
     }
   }
 };

@@ -4,7 +4,7 @@
       <div v-for="item in items" :key="item" class="d-flex justify-content-center row col-lg-11">
         <li class="todo-item col-lg-6 offset-lg-2">{{ item }}</li>
         <div class="col-lg-2 btn-wrapper">
-          <button class="btn btn-danger" @click="deleteItem">Delete</button>
+          <button class="btn btn-danger" @click="deleteItem(item)">Delete</button>
         </div>
       </div>
     </ul>
@@ -30,7 +30,12 @@ export default {
       this.items = JSON.parse(localStorage.getItem("todos")) || [];
     },
 
-    deleteItem() {}
+    deleteItem(item) {
+      const todos = JSON.parse(localStorage.getItem("todos"));
+      const newTodos = todos.filter((todo) => todo !== item);
+      this.items = newTodos;
+      localStorage.setItem("todos", JSON.stringify(newTodos));
+    }
   },
   watch: {
     item(newProp, oldProp) {
